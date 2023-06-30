@@ -24,13 +24,13 @@ if __name__ == "__main__":
             inner_menu_choice = social_network_ui.manageAccountMenu()
             #Handle inner menu here
             while True:
-                if inner_menu_choice == "5":
+                if inner_menu_choice == "7":
                     break
                 else:
                     inner_menu_choice = social_network_ui.manageAccountMenu()
 
         elif choice == "3":
-            print("Thank you for visiting. Goodbye3")
+            print("Thank you for visiting. Goodbye")
             break
 
         else:

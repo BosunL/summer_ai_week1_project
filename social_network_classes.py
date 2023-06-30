@@ -36,3 +36,4 @@ class Person:
     def send_message(self):
         #implement sending message to friend here
         pass
+    
