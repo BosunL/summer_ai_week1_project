@@ -1,33 +1,55 @@
-#Various import Statements can go here
-from  social_network_classes import SocialNetwork,Person
+# Various import statements can go here
+from social_network_classes import SocialNetwork, Person
 import social_network_ui
 
-
-
-#Create instance of main social network object
 ai_social_network = SocialNetwork()
+current_person = None
 
-#The line below is a python keyword to specify which 
 if __name__ == "__main__":
     print("########################################################")
     print("          Welcome to Summer AI Social Network")
     print("########################################################")
-    last_menu = None
-    choice = social_network_ui.mainMenu()
 
-    while True: 
+    while True:
+        choice = social_network_ui.mainMenu()
+
         if choice == "1":
             print("\nYou are now in the create account menu")
-            ai_social_network.create_account()
+            current_person = ai_social_network.create_account()
 
         elif choice == "2":
-            inner_menu_choice = social_network_ui.manageAccountMenu()
-            #Handle inner menu here
             while True:
-                if inner_menu_choice == "7":
+                inner_menu_choice = social_network_ui.manageAccountMenu()
+                if inner_menu_choice == "1":
+                    print("\nYou are now in the edit details menu")
+                    # Implement edit details functionality here
+                    name = input("Enter your new name: ")
+                    age = input("Enter your new age: ")
+                    current_person.id = name
+                    current_person.year = age
+                    print("Details updated successfully.")
+                elif inner_menu_choice == "2":
+                    person_id = input("Enter the ID of the person you want to add as a friend: ")
+                    person = ai_social_network.get_person(person_id)
+                    if person:
+                        current_person.add_friend(person_id)
+                    else:
+                        print("Person not found.")
+                elif inner_menu_choice == "3":
+                    current_person.view_friends()
+                elif inner_menu_choice == "4":
+                    person_id = input("Enter the ID of the person you want to send a message to: ")
+                    message = input("Enter your message: ")
+                    current_person.send_message(person_id, message)
+                elif inner_menu_choice == "5":
+                    person_id = input("Enter the ID of the person you want to block: ")
+                    current_person.block_friend(person_id)
+                elif inner_menu_choice == "6":
+                    current_person.view_messages()
+                elif inner_menu_choice == "7":
                     break
                 else:
-                    inner_menu_choice = social_network_ui.manageAccountMenu()
+                    print("Invalid input. Try again.")
 
         elif choice == "3":
             print("Thank you for visiting. Goodbye")
@@ -35,10 +57,3 @@ if __name__ == "__main__":
 
         else:
             print("Your input is invalid. Try Again!")
-        
-        #restart menu
-        choice = social_network_ui.mainMenu()
-
-
-
-        
